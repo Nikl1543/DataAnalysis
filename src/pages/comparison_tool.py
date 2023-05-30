@@ -103,9 +103,11 @@ nav = dbc.Nav(
     pills=True,
 )
 comparison_description = """
-The "Comparison"-tool has the following features:
+Purpose of the tool is to compare different filling processes, and has following features
 - Plot of the data
 - Ensemble Averaging
+    - Purpose: See the combined average of different processes, and could be usefull when:
+        - the processes to be analysed are on the same object
 - Normalization of data to range from 0 to 1
     - Purpose: Usefull for visual comparison
 """
@@ -130,7 +132,7 @@ tooltip = html.Div(
 )
 main_container = [html.Div([nav], style={'border-bottom': '1px solid #bcbcbc', 'margin-bottom':'-1px'}), 
                   html.Br(),
-                  html.H3(html.Strong('Comparison Tool')),
+                  html.H3(html.Strong('Comparison')),
                   dcc.Markdown(comparison_description),
                   tooltip,
                   dbc.Row([html.H4('Choose the variables to show')]),
@@ -139,7 +141,7 @@ main_container = [html.Div([nav], style={'border-bottom': '1px solid #bcbcbc', '
     options = ['Log Time', 'StepNo', 'CircuitName', 'TMP1', 'TMP2', 'B31', 'B32',
        'B21', 'B22', 'P101', 'RegulatorSP', 'RegulatorFB'],
     value = [],
-    inline = False,
+    inline = True,
     inputStyle={"margin-right": "10px", 'margin-left': '20px'}
 )),
                   html.Hr(),
@@ -211,8 +213,9 @@ def update_figs(var_val, checkbox_val, stored_dict):
                 hovertemplate = hovertemplates[col], 
                 legendgroup='mean',  # this can be any string, not just "group"
                 legendgrouptitle_text='Ensemble Average',))
-        
-        fig.update_layout(fig_style, height=max(200*len(file_dict.keys()), 600))
+    
+
+        fig.update_layout(fig_style, height=600)
         figshapes = get_stepNo_lines(df)
         
         fig.update_layout(shapes=figshapes )
