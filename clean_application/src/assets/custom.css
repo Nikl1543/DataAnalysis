@@ -1,0 +1,19 @@
+.list-group-item.active {
+	background-color: #c7dabf;
+	color: black;
+	border: #60893c solid 2px;
+
+.dropdown-item:active {
+background-color: red;
+}	
+
+
+*[class="output-loading"][data-dash-is-loading="true"]{
+    visibility: hidden;
+}
+*[class="output-loading"][data-dash-is-loading="true"]::before{
+    content: "Constructing PDF Report...  ";
+    display: inline-block;
+    color: black;
+    visibility: visible;
+}
